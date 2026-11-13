@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pure Souls</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Pure Souls is a youth-led initiative expanding access to learning, skill development and meaningful experiences for children from underserved communities.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Nunito:wght@400;600;700;800&family=Gochi+Hand&display=swap">
+<style>
+/* Layout: a sunny, sticker-book scroll. Bands alternate sky blue and butter yellow,
+   joined by soft waves; photo spots are hand-cut blobs; little shapes float in the margins. */
+:root {
+  --paper: #FFFDF5;      /* page ground, a warm off-white */
+  --sky: #DCEFFC;        /* light blue band */
+  --sky-2: #B9DDF7;      /* deeper sky for shapes */
+  --butter: #FFF3C4;     /* light yellow band */
+  --sun: #FFD35C;        /* sunshine highlight */
+  --ink: #1F3556;        /* navy text */
+  --ink-soft: #4C6283;   /* secondary text */
+  --blue: #2E6DB4;       /* buttons, links */
+  --blue-press: #245A96;
+  --peach: #FFDCCB;
+  --mint: #D3F1E2;
+  --lilac: #E6DEFB;
+  --white: #FFFFFF;
+
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Nunito", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-hand: "Gochi Hand", "Comic Sans MS", "Bradley Hand", cursive;
+
+  --wrap: 1160px;
+  --gutter-l: max(20px, env(safe-area-inset-left, 0px));
+  --gutter-r: max(20px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--blue); }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 8px; }
+
+.wrap {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding-left: var(--gutter-l);
+  padding-right: var(--gutter-r);
+}
+.band { position: relative; padding-block: 96px; }
+.band--sky { background: var(--sky); }
+.band--butter { background: var(--butter); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--f-body); font-weight: 800; font-size: 13px;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--blue);
+  background: var(--white); padding: 6px 14px; border-radius: 999px;
+  box-shadow: 0 2px 0 var(--sky-2);
+}
+.eyebrow svg { width: 14px; height: 14px; }
+.h2 { font-size: clamp(34px, 5vw, 56px); font-weight: 800; margin-top: 18px; }
+.lede { font-size: 19px; color: var(--ink-soft); max-width: 62ch; }
+.hand { font-family: var(--f-hand); font-weight: 400; letter-spacing: 0; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--f-body); font-weight: 800; font-size: 17px; text-decoration: none;
+  padding: 15px 26px; border-radius: 999px; border: 2.5px solid var(--ink);
+  transition: transform .18s cubic-bezier(.3,1.6,.5,1), box-shadow .18s;
+  cursor: pointer; white-space: nowrap;
+}
+.btn svg { width: 18px; height: 18px; transition: transform .2s; }
+.btn:hover svg { transform: translateX(3px) rotate(-8deg); }
+.btn--primary { background: var(--blue); color: var(--white); box-shadow: 0 5px 0 var(--ink); }
+.btn--sun { background: var(--sun); color: var(--ink); box-shadow: 0 5px 0 var(--ink); }
+.btn--ghost { background: var(--white); color: var(--ink); box-shadow: 0 5px 0 var(--ink); }
+.btn:hover { transform: translateY(-3px) rotate(-1deg); box-shadow: 0 8px 0 var(--ink); }
+.btn:active { transform: translateY(3px) scale(.98); box-shadow: 0 2px 0 var(--ink); }
+
+/* ---------- Header ---------- */
+body::before {
+  content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px);
+  z-index: 30; background: var(--paper);
+}
+.site-head {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-bottom: 2px dashed var(--sky-2);
+}
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding-block: 12px; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.logo-mark { width: auto; height: 46px; flex: none; transition: transform .3s cubic-bezier(.3,1.6,.5,1); }
+.logo:hover .logo-mark { transform: rotate(-6deg) scale(1.06); }
+.logo-word { font-family: var(--f-display); font-weight: 800; font-size: 23px; letter-spacing: -0.03em; line-height: 1; }
+.logo-word small { display: block; font-family: var(--f-hand); font-size: 14px; font-weight: 400; color: var(--blue); letter-spacing: 0; margin-top: 3px; }
+.nav { display: flex; align-items: center; gap: 4px; }
+.nav a:not(.btn) {
+  font-weight: 700; font-size: 15px; color: var(--ink); text-decoration: none;
+  padding: 8px 12px; border-radius: 999px; transition: background .2s;
+}
+.nav a:not(.btn):hover { background: var(--butter); }
+.nav .btn { padding: 10px 18px; font-size: 15px; box-shadow: 0 3px 0 var(--ink); margin-left: 8px; }
+.nav .btn:hover { box-shadow: 0 5px 0 var(--ink); }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; padding-block: 64px 120px; overflow: hidden; background:
+  radial-gradient(circle at 12% 18%, var(--butter) 0 160px, transparent 161px),
+  radial-gradient(circle at 92% 8%, var(--sky) 0 220px, transparent 221px),
+  var(--paper); }
+.hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.hero-copy { min-width: 0; position: relative; z-index: 2; }
+.hero h1 { font-size: clamp(44px, 6.6vw, 82px); font-weight: 800; margin-top: 22px; }
+.hero h1 .line { display: block; }
+.mark-wave { position: relative; display: inline-block; white-space: nowrap; }
+.mark-wave svg { position: absolute; left: -2%; bottom: -0.16em; width: 104%; height: 0.32em; overflow: visible; }
+.mark-wave path { stroke-dasharray: 600; stroke-dashoffset: 600; animation: draw 1.2s .5s ease-out forwards; }
+.mark-blob { position: relative; display: inline-block; z-index: 0; white-space: nowrap; }
+.mark-blob::before {
+  content: ""; position: absolute; inset: 8% -6% 0 -5%; z-index: -1;
+  background: var(--sun); border-radius: 42% 58% 46% 54% / 60% 44% 56% 40%;
+  transform: rotate(-2deg); animation: blob 9s ease-in-out infinite;
+}
+.hero-text { margin-top: 26px; font-size: 19px; color: var(--ink-soft); max-width: 56ch; }
+.hero-cta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+.hero-note { margin-top: 26px; display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 20px; }
+.hero-note svg { width: 46px; height: 30px; flex: none; }
+
+/* collage */
+.collage { position: relative; min-width: 0; aspect-ratio: 1 / 1; max-width: 560px; width: 100%; justify-self: center; }
+.collage .photo { position: absolute; }
+.collage .p1 { inset: 4% 22% 34% 4%; border-radius: 58% 42% 52% 48% / 46% 54% 46% 54%; }
+.collage .p2 { inset: 46% 2% 2% 40%; border-radius: 44% 56% 40% 60% / 58% 40% 60% 42%; }
+.collage .p3 { inset: 58% 62% 8% 0%; border-radius: 50%; }
+.collage .sun-buddy { position: absolute; right: 2%; top: 0%; width: 30%; }
+
+/* photo placeholders: swap the inner <div class="ph"> for an <img> when photos arrive */
+.photo {
+  overflow: hidden; border: 3px solid var(--ink); box-shadow: 8px 8px 0 var(--ink);
+  background: var(--sky);
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; }
+.ph {
+  width: 100%; height: 100%; display: grid; place-items: center; align-content: center; gap: 6px;
+  text-align: center; padding: 12%; color: var(--ink);
+  background-image: radial-gradient(var(--tone-dot, var(--sky-2)) 2px, transparent 2.5px);
+  background-size: 18px 18px;
+}
+.ph svg { width: clamp(36px, 22%, 76px); height: auto; }
+.ph span { font-family: var(--f-hand); font-size: clamp(15px, 1.8vw, 20px); line-height: 1.15; }
+.tone-sky { background-color: var(--sky); --tone-dot: var(--sky-2); }
+.tone-butter { background-color: var(--butter); --tone-dot: #F7DF8A; }
+.tone-peach { background-color: var(--peach); --tone-dot: #FBC0A6; }
+.tone-mint { background-color: var(--mint); --tone-dot: #A9E2C6; }
+.tone-lilac { background-color: var(--lilac); --tone-dot: #CBBEF4; }
+
+/* floating confetti shapes */
+.shape { position: absolute; pointer-events: none; z-index: 1; animation: bob 6s ease-in-out infinite; }
+.shape svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- Waves ---------- */
+.wave { display: block; width: 100%; height: 60px; position: absolute; left: 0; }
+.wave--top { top: -59px; }
+.wave--bottom { bottom: -59px; }
+
+/* ---------- Who we are ---------- */
+.who .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.who-copy { min-width: 0; }
+.who-copy .lede { margin-top: 22px; }
+.who-copy .lede + .lede { margin-top: 16px; }
+.note-card {
+  position: relative; background: var(--white); border: 3px solid var(--ink); border-radius: 28px;
+  padding: 40px 36px 34px; box-shadow: 10px 10px 0 var(--sun); transform: rotate(-1.5deg);
+  min-width: 0;
+}
+.note-card .tape {
+  position: absolute; top: -16px; left: 50%; width: 120px; height: 32px; transform: translateX(-50%) rotate(-4deg);
+  background: color-mix(in srgb, var(--sun) 70%, transparent); border-radius: 4px;
+}
+.note-card p { font-family: var(--f-display); font-weight: 700; font-size: clamp(22px, 2.4vw, 28px); line-height: 1.3; letter-spacing: -0.01em; }
+.verbs { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; list-style: none; padding: 0; }
+.verbs li {
+  font-weight: 800; font-size: 16px; padding: 8px 18px; border-radius: 999px; border: 2px solid var(--ink);
+  transition: transform .25s cubic-bezier(.3,1.8,.5,1); cursor: default;
+}
+.verbs li:nth-child(1) { background: var(--sky); transform: rotate(-3deg); }
+.verbs li:nth-child(2) { background: var(--butter); transform: rotate(2deg); }
+.verbs li:nth-child(3) { background: var(--peach); transform: rotate(-1deg); }
+.verbs li:nth-child(4) { background: var(--mint); transform: rotate(3deg); }
+.verbs li:hover { transform: translateY(-6px) rotate(0) scale(1.06); }
+.note-card .sig { margin-top: 18px; font-size: 22px; color: var(--blue); }
+
+/* ---------- What we do ---------- */
+.section-head { display: grid; gap: 0; justify-items: start; max-width: 720px; }
+.section-head.center { margin-inline: auto; justify-items: center; text-align: center; }
+.section-head .lede { margin-top: 16px; }
+.cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+.card {
+  position: relative; border: 3px solid var(--ink); border-radius: 30px; padding: 30px 26px 30px;
+  box-shadow: 0 8px 0 var(--ink); transition: transform .3s cubic-bezier(.3,1.5,.5,1), box-shadow .3s;
+  min-width: 0; display: flex; flex-direction: column; gap: 14px;
+}
+.card:nth-child(1) { background: var(--sky); }
+.card:nth-child(2) { background: var(--butter); }
+.card:nth-child(3) { background: var(--mint); }
+.card:nth-child(4) { background: var(--peach); }
+.card:nth-child(odd) { transform: rotate(-1deg); }
+.card:nth-child(even) { transform: rotate(1deg) translateY(14px); }
+.card:hover { transform: translateY(-8px) rotate(0); box-shadow: 0 16px 0 var(--ink); }
+.card-icon {
+  width: 72px; height: 72px; border-radius: 22px; background: var(--white); border: 2.5px solid var(--ink);
+  display: grid; place-items: center;
+}
+.card-icon svg { width: 44px; height: 44px; }
+.card:hover .card-icon svg { animation: wiggle .6s ease-in-out; }
+.card h3 { font-size: 23px; font-weight: 800; margin-top: 6px; }
+.card p { font-size: 16px; color: var(--ink-soft); }
+
+/* ---------- Journey ---------- */
+.journey { text-align: center; overflow: hidden; }
+.stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 22px; margin-top: 56px; list-style: none; padding: 0; }
+.stat {
+  flex: 0 1 200px; min-width: 0; aspect-ratio: 1 / 1; display: grid; place-content: center; gap: 4px;
+  padding: 18px; border: 3px solid var(--ink); background: var(--white);
+  box-shadow: 6px 6px 0 var(--ink); transition: transform .35s cubic-bezier(.3,1.6,.5,1);
+}
+.stat:nth-child(1) { border-radius: 50%; background: var(--sky); }
+.stat:nth-child(2) { border-radius: 38% 62% 54% 46% / 52% 42% 58% 48%; background: var(--white); }
+.stat:nth-child(3) { border-radius: 50%; background: var(--sun); }
+.stat:nth-child(4) { border-radius: 58% 42% 40% 60% / 46% 58% 42% 54%; background: var(--white); }
+.stat:nth-child(5) { border-radius: 50%; background: var(--mint); }
+.stat:hover { transform: scale(1.06) rotate(-4deg); }
+.stat b { font-family: var(--f-display); font-weight: 800; font-size: clamp(40px, 5vw, 58px); line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+.stat b.word { font-size: clamp(30px, 3.6vw, 40px); }
+.stat span { font-weight: 700; font-size: 15px; line-height: 1.3; color: var(--ink-soft); max-width: 15ch; margin-inline: auto; }
+
+/* ---------- Explore our work ---------- */
+.work-list { display: grid; gap: 88px; margin-top: 72px; }
+.work {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 64px; align-items: center;
+}
+.work:nth-child(even) .work-photo { order: 2; }
+.work-photo { position: relative; min-width: 0; }
+.work-photo .photo { aspect-ratio: 5 / 4; width: 100%; max-width: 100%; }
+.work:nth-child(1) .photo { border-radius: 46% 54% 44% 56% / 52% 46% 54% 48%; }
+.work:nth-child(2) .photo { border-radius: 36px; transform: rotate(2deg); }
+.work:nth-child(3) .photo { border-radius: 56% 44% 60% 40% / 44% 60% 40% 56%; }
+.work:nth-child(4) .photo { border-radius: 36px; transform: rotate(-2deg); }
+.work:nth-child(5) .photo { border-radius: 50% 50% 42% 58% / 56% 44% 56% 44%; }
+.work-photo .sticker {
+  position: absolute; z-index: 2; bottom: -14px; right: 6%; background: var(--white);
+  border: 2.5px solid var(--ink); border-radius: 999px; padding: 6px 16px; font-size: 18px;
+  transform: rotate(-4deg); box-shadow: 0 3px 0 var(--ink); white-space: nowrap;
+}
+.work:nth-child(even) .work-photo .sticker { right: auto; left: 6%; transform: rotate(4deg); }
+.work-copy { min-width: 0; }
+.work-tag {
+  display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px;
+  text-transform: uppercase; letter-spacing: 0.1em; color: var(--blue);
+}
+.work-tag i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); display: inline-block; }
+.work h3 { font-size: clamp(28px, 3.2vw, 38px); font-weight: 800; margin-top: 12px; }
+.work p { margin-top: 14px; font-size: 18px; color: var(--ink-soft); max-width: 52ch; }
+.work .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; list-style: none; padding: 0; }
+.work .chips li { font-size: 14px; font-weight: 700; padding: 5px 14px; border-radius: 999px; background: var(--white); border: 2px solid var(--sky-2); }
+
+/* ---------- Team ---------- */
+.team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 48px; margin-top: 52px; }
+.member { display: grid; justify-items: center; gap: 14px; text-align: center; width: 230px; max-width: 100%; }
+.member .photo { width: 210px; height: 210px; max-width: 100%; border-radius: 50%; border-style: dashed; box-shadow: 6px 6px 0 var(--sky-2); }
+.member b { font-family: var(--f-display); font-size: 22px; font-weight: 800; }
+.member span { color: var(--ink-soft); font-weight: 700; font-size: 15px; margin-top: -10px; }
+
+/* ---------- Get involved ---------- */
+.involve-card {
+  position: relative; overflow: hidden; background: var(--sun); border: 3px solid var(--ink); border-radius: 44px;
+  padding: clamp(40px, 7vw, 80px) clamp(24px, 6vw, 72px); text-align: center; box-shadow: 0 12px 0 var(--ink);
+}
+.involve-card > * { position: relative; z-index: 2; }
+.involve-card h2 { font-size: clamp(36px, 6vw, 68px); font-weight: 800; }
+.involve-card .lede { margin: 18px auto 0; color: var(--ink); font-size: 20px; max-width: 46ch; }
+.roles { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 26px; list-style: none; padding: 0; }
+.roles li { background: var(--white); border: 2px solid var(--ink); border-radius: 999px; padding: 6px 16px; font-weight: 800; font-size: 15px; }
+.involve-cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 36px; }
+.mail-line { margin-top: 28px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; font-weight: 700; }
+.mail-line code { font-family: var(--f-body); font-weight: 800; background: var(--white); padding: 4px 12px; border-radius: 10px; border: 2px dashed var(--ink); user-select: all; }
+.copy-btn {
+  font: inherit; font-size: 14px; font-weight: 800; background: transparent; color: var(--ink);
+  border: 2px solid var(--ink); border-radius: 999px; padding: 4px 12px; cursor: pointer;
+}
+.copy-btn:hover { background: var(--white); }
+
+/* ---------- Footer ---------- */
+.site-foot { background: var(--sky); padding-block: 64px 40px; position: relative; margin-top: 60px; }
+.foot-grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; align-items: flex-start; }
+.site-foot .logo-mark { height: 60px; }
+.foot-grid p { color: var(--ink-soft); max-width: 40ch; margin-top: 14px; font-size: 16px; }
+.foot-links { display: flex; flex-wrap: wrap; gap: 6px 18px; list-style: none; padding: 0; margin: 0; }
+.foot-links a { color: var(--ink); font-weight: 700; text-decoration: none; }
+.foot-links a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.foot-base { margin-top: 40px; padding-top: 20px; border-top: 2px dashed var(--sky-2); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; font-size: 14px; color: var(--ink-soft); }
+
+/* ---------- Motion ---------- */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-14px) rotate(calc(var(--r, 0deg) + 12deg)); }
+}
+@keyframes blob {
+  0%, 100% { border-radius: 42% 58% 46% 54% / 60% 44% 56% 40%; }
+  50% { border-radius: 56% 44% 58% 42% / 44% 58% 42% 56%; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); } 25% { transform: rotate(-12deg); } 50% { transform: rotate(10deg); } 75% { transform: rotate(-5deg); }
+}
+@keyframes blink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes buddy { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-10px) rotate(4deg); } }
+@keyframes pop { from { transform: translateY(26px) scale(.97); } to { transform: none; } }
+
+.sun-buddy { animation: buddy 5s ease-in-out infinite; }
+.sun-buddy .rays { transform-origin: 60px 60px; animation: spin 30s linear infinite; }
+.sun-buddy .eye { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
+.js .pop.in { animation: pop .7s cubic-bezier(.2,1.2,.4,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .mark-wave path { stroke-dashoffset: 0; }
+  html { scroll-behavior: auto; }
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1020px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+  .card:nth-child(even) { transform: rotate(1deg); }
+  .nav a:not(.btn) { display: none; }
+}
+@media (max-width: 860px) {
+  .band { padding-block: 80px; }
+  .hero { padding-block: 40px 100px; }
+  .hero .wrap, .who .wrap, .work { grid-template-columns: 1fr; gap: 40px; }
+  .collage { max-width: 440px; }
+  .work:nth-child(even) .work-photo { order: 0; }
+  .work-list { gap: 64px; }
+  .work-photo { max-width: 520px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .cards { grid-template-columns: 1fr; }
+  .card:nth-child(n) { transform: none; }
+  .stats { gap: 14px; }
+  .stat { flex-basis: calc(50% - 7px); }
+  .stat:nth-child(5) { flex-basis: 64%; aspect-ratio: auto; border-radius: 999px; padding-block: 26px; }
+  .logo-word small { display: none; }
+  .nav .btn { padding: 9px 14px; font-size: 14px; }
+  .hero-cta .btn, .involve-cta .btn { flex: 1 1 100%; justify-content: center; }
+  .note-card { padding: 34px 24px 28px; }
+  .team-grid { gap: 28px; }
+  .member { width: 150px; }
+  .member .photo { width: 140px; height: 140px; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Pure Souls home">
+      <img class="logo-mark" src="logo-mark.png" alt="" width="59" height="44">
+      <span class="logo-word">Pure Souls<small>youth-led, for children</small></span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#who">Who we are</a>
+      <a href="#what">What we do</a>
+      <a href="#journey">Our journey</a>
+      <a href="#work">Our work</a>
+      <a href="#team">Team</a>
+      <a class="btn btn--sun" href="#involve">Get involved</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ 1. HERO ============ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="shape" style="width:34px;height:34px;left:4%;top:62%;--r:10deg;animation-delay:-1s" aria-hidden="true">
+    <svg viewBox="0 0 40 40"><path d="M20 3 L24.5 14.5 L37 15.5 L27.5 23.5 L30.5 36 L20 29 L9.5 36 L12.5 23.5 L3 15.5 L15.5 14.5 Z" fill="#FFD35C" stroke="#1F3556" stroke-width="2.5" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="shape" style="width:26px;height:26px;left:46%;top:10%;animation-delay:-3s" aria-hidden="true">
+    <svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#B9DDF7" stroke="#1F3556" stroke-width="2.5"/></svg>
+  </div>
+  <div class="shape" style="width:60px;height:24px;left:40%;bottom:12%;--r:-8deg;animation-delay:-2s" aria-hidden="true">
+    <svg viewBox="0 0 64 24"><path d="M3 14 Q11 2 19 12 T35 12 T51 12 T63 10" fill="none" stroke="#2E6DB4" stroke-width="3.5" stroke-linecap="round"/></svg>
+  </div>
+
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14 C2 9.5 1 6.5 3 4.3 C4.8 2.4 7.1 3.3 8 5 C8.9 3.3 11.2 2.4 13 4.3 C15 6.5 14 9.5 8 14Z" fill="currentColor"/></svg>
+        A youth-led initiative
+      </span>
+      <h1 id="hero-title">
+        <span class="line">Creating <span class="mark-wave">opportunities.<svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12 Q40 2 76 11 T150 11 T224 11 T296 9" fill="none" stroke="#2E6DB4" stroke-width="6" stroke-linecap="round"/></svg></span></span>
+        <span class="line">Nurturing <span class="mark-blob">potential.</span></span>
+      </h1>
+      <p class="hero-text">Pure Souls is a youth-led initiative committed to expanding access to learning, skill development and meaningful experiences for children from underserved communities. Through educational programmes, creative workshops and community engagement, we aim to create spaces where children can explore their interests, develop their abilities and discover their potential.</p>
+      <div class="hero-cta">
+        <a class="btn btn--primary" href="https://docs.google.com/forms/d/1rH5TCUOpf4C1jOFI2o5QlgW2GWnbknloNNmy1je18Mc/viewform" target="_blank" rel="noopener">
+          Volunteer With Us
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10 H15 M10.5 5 L15.5 10 L10.5 15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#work">See our work</a>
+      </div>
+      <p class="hero-note hand">
+        <svg viewBox="0 0 50 32" aria-hidden="true"><path d="M3 6 C14 26 30 30 44 20 M36 16 L45 19.5 L41 28" fill="none" stroke="#2E6DB4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        200+ children reached, and counting!
+      </p>
+    </div>
+
+    <div class="collage" aria-label="Photos from Pure Souls activities">
+      <div class="photo p1 pop">
+        <img src="photos/group-flex.jpg" alt="Pure Souls children and volunteers striking a strong pose together on a lawn" style="object-position:50% 60%">
+      </div>
+      <div class="photo p2 pop">
+        <img src="photos/camp-group-wave.jpg" alt="Children and a volunteer waving and cheering together on a lawn" style="object-position:50% 88%">
+      </div>
+      <div class="photo p3 pop">
+        <img src="photos/volunteer-hug.jpg" alt="A volunteer giving a young girl a piggyback hug" style="object-position:50% 30%">
+      </div>
+      <svg class="sun-buddy" viewBox="0 0 120 120" aria-hidden="true">
+        <g class="rays" stroke="#1F3556" stroke-width="3" stroke-linecap="round">
+          <line x1="60" y1="4" x2="60" y2="18"/><line x1="60" y1="102" x2="60" y2="116"/>
+          <line x1="4" y1="60" x2="18" y2="60"/><line x1="102" y1="60" x2="116" y2="60"/>
+          <line x1="20" y1="20" x2="30" y2="30"/><line x1="90" y1="90" x2="100" y2="100"/>
+          <line x1="100" y1="20" x2="90" y2="30"/><line x1="30" y1="90" x2="20" y2="100"/>
+        </g>
+        <circle cx="60" cy="60" r="32" fill="#FFD35C" stroke="#1F3556" stroke-width="3.5"/>
+        <ellipse class="eye" cx="49" cy="55" rx="3.6" ry="4.6" fill="#1F3556"/>
+        <ellipse class="eye" cx="71" cy="55" rx="3.6" ry="4.6" fill="#1F3556"/>
+        <circle cx="42" cy="66" r="4.5" fill="#FFB49A" opacity=".8"/><circle cx="78" cy="66" r="4.5" fill="#FFB49A" opacity=".8"/>
+        <path d="M49 68 Q60 79 71 68" fill="none" stroke="#1F3556" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <div class="shape" style="width:40px;height:40px;left:86%;top:34%;--r:-14deg;animation-delay:-4s" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M20 3 L24.5 14.5 L37 15.5 L27.5 23.5 L30.5 36 L20 29 L9.5 36 L12.5 23.5 L3 15.5 L15.5 14.5 Z" fill="#D3F1E2" stroke="#1F3556" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="shape" style="width:30px;height:30px;left:36%;top:88%;animation-delay:-1.5s" aria-hidden="true">
+        <svg viewBox="0 0 30 30"><rect x="5" y="5" width="20" height="20" rx="5" fill="#E6DEFB" stroke="#1F3556" stroke-width="2.5" transform="rotate(18 15 15)"/></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. WHO WE ARE ============ -->
+<section class="band band--sky who" id="who" aria-labelledby="who-title">
+  <svg class="wave wave--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 30 Q120 0 240 26 T480 26 T720 26 T960 26 T1200 26 T1440 22 L1440 60 Z" fill="#DCEFFC"/></svg>
+  <div class="wrap">
+    <div class="who-copy pop">
+      <span class="eyebrow">Who we are</span>
+      <h2 class="h2" id="who-title">More than just learning.</h2>
+      <p class="lede">At Pure Souls, we believe that education extends beyond textbooks and classrooms. Every child deserves opportunities to explore, experiment, create and develop skills that prepare them for the world beyond school.</p>
+      <p class="lede">We work towards making these opportunities more accessible through structured learning experiences, interactive activities and consistent community engagement.</p>
+    </div>
+    <figure class="note-card pop" style="margin:0">
+      <span class="tape" aria-hidden="true"></span>
+      <p>Every child deserves opportunities to</p>
+      <ul class="verbs" aria-label="What every child deserves to do">
+        <li>explore</li><li>experiment</li><li>create</li><li>develop skills</li>
+      </ul>
+      <figcaption class="sig hand">... for the world beyond school.</figcaption>
+    </figure>
+  </div>
+  <svg class="wave wave--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L0 30 Q180 60 360 32 T720 32 T1080 32 T1440 36 L1440 0 Z" fill="#DCEFFC"/></svg>
+</section>
+
+<!-- ============ 3. WHAT WE DO ============ -->
+<section class="band what" id="what" aria-labelledby="what-title" style="padding-top:140px">
+  <div class="wrap">
+    <div class="section-head center pop">
+      <span class="eyebrow">What we do</span>
+      <h2 class="h2" id="what-title">Four ways we show up for children</h2>
+    </div>
+    <div class="cards">
+      <article class="card pop">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M6 12 C12 9 19 9 24 13 C29 9 36 9 42 12 L42 38 C36 35 29 35 24 39 C19 35 12 35 6 38 Z" fill="#DCEFFC" stroke="#1F3556" stroke-width="3" stroke-linejoin="round"/><path d="M24 13 V39" stroke="#1F3556" stroke-width="3"/><path d="M11 19 H19 M11 25 H19 M29 19 H37" stroke="#2E6DB4" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Education &amp; Learning</h3>
+        <p>Creating accessible and engaging learning experiences.</p>
+      </article>
+      <article class="card pop">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 5 C15 5 10 12 10 19 C10 25 14 28 16 31 L16 36 H32 L32 31 C34 28 38 25 38 19 C38 12 33 5 24 5 Z" fill="#FFF3C4" stroke="#1F3556" stroke-width="3" stroke-linejoin="round"/><path d="M18 41 H30 M20 45 H28" stroke="#1F3556" stroke-width="3" stroke-linecap="round"/><path d="M20 22 L23 26 L29 18" fill="none" stroke="#2E6DB4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Skill Development</h3>
+        <p>Encouraging children to develop practical, creative and interpersonal skills.</p>
+      </article>
+      <article class="card pop">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><circle cx="18" cy="28" r="13" fill="#D3F1E2" stroke="#1F3556" stroke-width="3"/><path d="M5.5 24 C12 27 24 27 30.5 24 M18 15 C14 21 14 35 18 41" fill="none" stroke="#1F3556" stroke-width="2.5"/><path d="M33 6 L42 15 L32 25 L28 21 Z" fill="#FFD35C" stroke="#1F3556" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Holistic Development</h3>
+        <p>Providing opportunities to explore sports, arts, communication, teamwork and other interests.</p>
+      </article>
+      <article class="card pop">
+        <div class="card-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 42 C10 33 5 25 9 18 C13 11 20 12 24 18 C28 12 35 11 39 18 C43 25 38 33 24 42Z" fill="#FFDCCB" stroke="#1F3556" stroke-width="3" stroke-linejoin="round"/><circle cx="17" cy="25" r="3" fill="#1F3556"/><circle cx="31" cy="25" r="3" fill="#1F3556"/><path d="M20 31 Q24 34 28 31" fill="none" stroke="#1F3556" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Community Engagement</h3>
+        <p>Building meaningful connections through workshops, events and collaborative initiatives.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4. OUR JOURNEY ============ -->
+<section class="band band--butter journey" id="journey" aria-labelledby="journey-title">
+  <svg class="wave wave--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 34 Q160 4 320 30 T640 30 T960 30 T1280 30 T1440 26 L1440 60 Z" fill="#FFF3C4"/></svg>
+  <div class="shape" style="width:44px;height:44px;left:5%;top:18%;--r:8deg" aria-hidden="true">
+    <svg viewBox="0 0 40 40"><path d="M20 3 L24.5 14.5 L37 15.5 L27.5 23.5 L30.5 36 L20 29 L9.5 36 L12.5 23.5 L3 15.5 L15.5 14.5 Z" fill="#FFFFFF" stroke="#1F3556" stroke-width="2.5" stroke-linejoin="round"/></svg>
+  </div>
+  <div class="shape" style="width:32px;height:32px;right:7%;top:26%;animation-delay:-2.5s" aria-hidden="true">
+    <svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#B9DDF7" stroke="#1F3556" stroke-width="2.5"/></svg>
+  </div>
+  <div class="wrap">
+    <div class="section-head center pop">
+      <span class="eyebrow">Our journey so far</span>
+      <h2 class="h2" id="journey-title">Small steps, lots of smiles</h2>
+    </div>
+    <ul class="stats">
+      <li class="stat pop"><b data-count="3">3+</b><span>years working with children</span></li>
+      <li class="stat pop"><b data-count="30">30+</b><span>celebrations &amp; community events</span></li>
+      <li class="stat pop"><b data-count="200">200+</b><span>children reached</span></li>
+      <li class="stat pop"><b data-count="20">20+</b><span>organisations collaborated with</span></li>
+      <li class="stat pop"><b class="word">Many</b><span>workshops, camps &amp; learning initiatives</span></li>
+    </ul>
+  </div>
+  <svg class="wave wave--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L0 28 Q200 60 400 30 T800 30 T1200 30 T1440 34 L1440 0 Z" fill="#FFF3C4"/></svg>
+</section>
+
+<!-- ============ 5. EXPLORE OUR WORK ============ -->
+<section class="band work-band" id="work" aria-labelledby="work-title" style="padding-top:140px">
+  <div class="wrap">
+    <div class="section-head pop">
+      <span class="eyebrow">Explore our work</span>
+      <h2 class="h2" id="work-title">Where learning gets loud, messy and fun</h2>
+    </div>
+
+    <div class="work-list">
+      <article class="work">
+        <div class="work-photo pop">
+          <div class="photo"><img src="photos/learning-session.jpg" alt="Children drawing and working on worksheets on mats" loading="lazy" style="object-position:50% 65%"></div>
+          <span class="sticker hand">ABC &amp; 123</span>
+        </div>
+        <div class="work-copy pop">
+          <span class="work-tag"><i style="background:var(--sky)"></i>Learning</span>
+          <h3>Education &amp; Academic Learning</h3>
+          <p>Supporting children's learning through interactive educational activities, foundational learning and accessible teaching methods.</p>
+          <ul class="chips"><li>Foundational learning</li><li>Interactive activities</li><li>Summer camps</li></ul>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-photo pop">
+          <div class="photo"><img src="photos/creative-workshop.jpg" alt="Children painting clay pots at an art workshop" loading="lazy" style="object-position:50% 70%"></div>
+          <span class="sticker hand">origami time!</span>
+        </div>
+        <div class="work-copy pop">
+          <span class="work-tag"><i style="background:var(--sun)"></i>Creativity</span>
+          <h3>Creative Learning &amp; Skill Development</h3>
+          <p>Organising workshops that encourage creativity, experimentation and the development of practical skills through activities such as origami, arts and crafts.</p>
+          <ul class="chips"><li>Origami</li><li>Arts &amp; crafts</li><li>Creative workshops</li></ul>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-photo pop">
+          <div class="photo"><img src="photos/games-circle.jpg" alt="Children and volunteers holding hands in a circle game" loading="lazy" style="object-position:50% 50%"></div>
+          <span class="sticker hand">on your marks...</span>
+        </div>
+        <div class="work-copy pop">
+          <span class="work-tag"><i style="background:var(--mint)"></i>Movement</span>
+          <h3>Sports, Physical Activity &amp; Expression</h3>
+          <p>Creating opportunities for children to participate in sports, dance, physical activities and team-based experiences.</p>
+          <ul class="chips"><li>Sports</li><li>Dance</li><li>Team games</li></ul>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-photo pop">
+          <div class="photo"><img src="photos/chess-session.jpg" alt="Children playing chess on mats outdoors" loading="lazy" style="object-position:50% 55%"></div>
+          <span class="sticker hand">checkmate!</span>
+        </div>
+        <div class="work-copy pop">
+          <span class="work-tag"><i style="background:var(--lilac)"></i>Thinking</span>
+          <h3>Cognitive &amp; Holistic Development</h3>
+          <p>Introducing activities such as chess, puzzles and interactive games that encourage problem-solving, critical thinking and collaboration.</p>
+          <ul class="chips"><li>Chess</li><li>Puzzles</li><li>Interactive games</li></ul>
+        </div>
+      </article>
+
+      <article class="work">
+        <div class="work-photo pop">
+          <div class="photo"><img src="photos/community-celebration.jpg" alt="Children performing music and song at a Pure Souls celebration" loading="lazy" style="object-position:50% 50%"></div>
+          <span class="sticker hand">let's celebrate</span>
+        </div>
+        <div class="work-copy pop">
+          <span class="work-tag"><i style="background:var(--peach)"></i>Together</span>
+          <h3>Community Engagement &amp; Celebrations</h3>
+          <p>Conducting celebrations, community events and collaborative activities that provide children with opportunities for social interaction, participation and exposure.</p>
+          <ul class="chips"><li>Festivals</li><li>Community events</li><li>Collaborations</li></ul>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. MEET THE TEAM ============ -->
+<section class="band band--sky team" id="team" aria-labelledby="team-title">
+  <svg class="wave wave--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 30 Q120 0 240 26 T480 26 T720 26 T960 26 T1200 26 T1440 22 L1440 60 Z" fill="#DCEFFC"/></svg>
+  <div class="wrap">
+    <div class="section-head center pop">
+      <span class="eyebrow">Meet the team</span>
+      <h2 class="h2" id="team-title">The people behind Pure Souls</h2>
+      <p class="lede">Introductions coming soon.</p>
+    </div>
+    <div class="team-grid">
+      <div class="member pop">
+        <div class="photo"><div class="ph tone-butter">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="10" fill="#FFDCCB" stroke="#1F3556" stroke-width="3"/><path d="M14 54 C14 38 50 38 50 54" fill="#B9DDF7" stroke="#1F3556" stroke-width="3" stroke-linejoin="round"/></svg>
+          <span>photo coming soon</span>
+        </div></div>
+        <b>Team member</b><span>Founder</span>
+      </div>
+      <div class="member pop">
+        <div class="photo"><div class="ph tone-mint">
+          <svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="10" fill="#FFDCCB" stroke="#1F3556" stroke-width="3"/><path d="M14 54 C14 38 50 38 50 54" fill="#FFF3C4" stroke="#1F3556" stroke-width="3" stroke-linejoin="round"/></svg>
+          <span>photo coming soon</span>
+        </div></div>
+        <b>Team member</b><span>Mentor</span>
+      </div>
+    </div>
+  </div>
+  <svg class="wave wave--bottom" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0 L0 30 Q180 60 360 32 T720 32 T1080 32 T1440 36 L1440 0 Z" fill="#DCEFFC"/></svg>
+</section>
+
+<!-- ============ 7. GET INVOLVED ============ -->
+<section class="band involve" id="involve" aria-labelledby="involve-title" style="padding-top:140px">
+  <div class="wrap">
+    <div class="involve-card pop">
+      <div class="shape" style="width:46px;height:46px;left:6%;top:12%;--r:12deg" aria-hidden="true">
+        <svg viewBox="0 0 40 40"><path d="M20 3 L24.5 14.5 L37 15.5 L27.5 23.5 L30.5 36 L20 29 L9.5 36 L12.5 23.5 L3 15.5 L15.5 14.5 Z" fill="#FFFFFF" stroke="#1F3556" stroke-width="2.5" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="shape" style="width:34px;height:34px;right:8%;top:18%;animation-delay:-2s" aria-hidden="true">
+        <svg viewBox="0 0 30 30"><circle cx="15" cy="15" r="11" fill="#DCEFFC" stroke="#1F3556" stroke-width="2.5"/></svg>
+      </div>
+      <div class="shape" style="width:64px;height:24px;right:12%;bottom:14%;--r:-6deg;animation-delay:-3.5s" aria-hidden="true">
+        <svg viewBox="0 0 64 24"><path d="M3 14 Q11 2 19 12 T35 12 T51 12 T63 10" fill="none" stroke="#1F3556" stroke-width="3.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="shape" style="width:30px;height:30px;left:10%;bottom:16%;animation-delay:-1s" aria-hidden="true">
+        <svg viewBox="0 0 30 30"><rect x="5" y="5" width="20" height="20" rx="5" fill="#D3F1E2" stroke="#1F3556" stroke-width="2.5" transform="rotate(18 15 15)"/></svg>
+      </div>
+
+      <span class="eyebrow">Get involved</span>
+      <h2 id="involve-title" style="margin-top:18px">Be a part of the change.</h2>
+      <p class="lede">Whether you are a student, educator, volunteer or organisation, there is a place for you to contribute.</p>
+      <ul class="roles" aria-label="Who can contribute"><li>Students</li><li>Educators</li><li>Volunteers</li><li>Organisations</li></ul>
+      <div class="involve-cta">
+        <a class="btn btn--primary" href="https://docs.google.com/forms/d/1rH5TCUOpf4C1jOFI2o5QlgW2GWnbknloNNmy1je18Mc/viewform" target="_blank" rel="noopener">
+          Volunteer With Us
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10 H15 M10.5 5 L15.5 10 L10.5 15" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="mailto:puresouls.in@gmail.com?subject=Collaborating%20with%20Pure%20Souls">
+          Collaborate With Us
+          <svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="4.5" width="15" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M3 5.5 L10 11 L17 5.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+      <p class="mail-line">Or write to us at <code id="email">puresouls.in@gmail.com</code> <button class="copy-btn" id="copy-email" type="button">Copy</button></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <svg class="wave wave--top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60 L0 34 Q160 4 320 30 T640 30 T960 30 T1280 30 T1440 26 L1440 60 Z" fill="#DCEFFC"/></svg>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top">
+          <img class="logo-mark" src="logo-mark.png" alt="" width="59" height="44">
+          <span class="logo-word">Pure Souls</span>
+        </a>
+        <p>A youth-led initiative creating opportunities and nurturing potential in children from underserved communities.</p>
+      </div>
+      <ul class="foot-links" aria-label="Footer">
+        <li><a href="#who">Who we are</a></li>
+        <li><a href="#what">What we do</a></li>
+        <li><a href="#journey">Our journey</a></li>
+        <li><a href="#work">Our work</a></li>
+        <li><a href="#involve">Get involved</a></li>
+      </ul>
+    </div>
+    <div class="foot-base">
+      <span>© 2026 Pure Souls</span>
+      <span>puresouls.in@gmail.com</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Gentle pop-in as sections scroll into view (content is visible before and after).
+  if ('IntersectionObserver' in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.pop').forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top > window.innerHeight) io.observe(el);
+    });
+
+    // Count the journey numbers up when the strip comes into view.
+    var counted = false;
+    var strip = document.querySelector('.stats');
+    var co = new IntersectionObserver(function (entries) {
+      if (!entries[0].isIntersecting || counted) return;
+      counted = true; co.disconnect();
+      strip.querySelectorAll('b[data-count]').forEach(function (b) {
+        var end = +b.dataset.count, t0 = null, dur = 1400;
+        function step(t) {
+          if (!t0) t0 = t;
+          var p = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - p, 3);
+          b.textContent = Math.round(end * eased) + '+';
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      });
+    }, { threshold: 0.4 });
+    if (strip && strip.getBoundingClientRect().top > window.innerHeight) co.observe(strip);
+  }
+
+  // Copy email
+  var btn = document.getElementById('copy-email');
+  var email = document.getElementById('email');
+  btn && btn.addEventListener('click', function () {
+    var text = email.textContent.trim();
+    function done() { btn.textContent = 'Copied!'; setTimeout(function () { btn.textContent = 'Copy'; }, 1800); }
+    function fallback() {
+      var range = document.createRange(); range.selectNodeContents(email);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range);
+      btn.textContent = 'Selected, press Ctrl+C';
+    }
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
